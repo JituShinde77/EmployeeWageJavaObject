@@ -9,30 +9,32 @@ public class EmployeeWage{
 	private final int partTimeHrs;
 
 	public EmployeeWage(int wagePerHour, int dayHrs, int partTimeHrs){
-                this.wagePerHour = wagePerHour;
-                this.dayHrs = dayHrs;
+      this.wagePerHour = wagePerHour;
+      this.dayHrs = dayHrs;
 		this.partTimeHrs = partTimeHrs;
-        }
+   }
 
-        public int getEmpHrs(){
-                int empCheck = (int)Math.floor(Math.random() * 10 ) %3;
-                if (empCheck == PRESENT )
-                        return dayHrs;
-                else if (empCheck == PARTTIME)
-                        return partTimeHrs;
-		else
-			return 0;
-        }
+   public int getEmpHrs(){
+      int empCheck = (int)Math.floor(Math.random() * 10 ) %3;
+      switch(empCheck){
+		   case PRESENT:
+            return dayHrs;
+         case PARTTIME:
+            return partTimeHrs;
+		}
+	   return 0;
+   }
 
-        public int getDailyEmplyeeWage(){
-                int empHrs = getEmpHrs();
-                int dailyWage = 0;
-                dailyWage = wagePerHour * empHrs;
-                return dailyWage;
-        }
-        public static void main(String[] args){
-                System.out.println("Welcome to Employee Wage..");
-                EmployeeWage empWage = new EmployeeWage(20, 8, 4);
-                System.out.println("Employee Daily wage is: "+empWage.getDailyEmplyeeWage());
-        }
+   public int getDailyEmplyeeWage(){
+   	int empHrs = getEmpHrs();
+      int dailyWage = 0;
+      dailyWage = wagePerHour * empHrs;
+      return dailyWage;
+   }
+
+   public static void main(String[] args){
+   	System.out.println("Welcome to Employee Wage..");
+    	EmployeeWage empWage = new EmployeeWage(20, 8, 4);
+      System.out.println("Employee Daily wage is: "+empWage.getDailyEmplyeeWage());
+   }
 }
