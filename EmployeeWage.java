@@ -33,7 +33,7 @@ public class EmployeeWage{
 		int totalWage = 0;
 		int workingDays = 0;
 		int workingHrs = 0;
-		while (workingDays < 20 && workingHrs < 100){
+		while (workingDays < maxWorkingDays && workingHrs < maxWorkingHrs){
    			int empHrs = getEmpHrs();
      			int dailyWage = 0;
       			dailyWage = wagePerHour * empHrs;
