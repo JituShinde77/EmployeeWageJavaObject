@@ -9,9 +9,11 @@ public class EmployeeWage{
 	private final int partTimeHrs;
 	private final int maxWorkingDays;
 	private final int maxWorkingHrs;
+	private final String company;
 
-	public EmployeeWage(int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
-      		this.wagePerHour = wagePerHour;
+	public EmployeeWage(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
+      		this.company = company;
+		this.wagePerHour = wagePerHour;
      		this.dayHrs = dayHrs;
 		this.partTimeHrs = partTimeHrs;
 		this.maxWorkingDays = maxWorkingDays;
@@ -29,7 +31,7 @@ public class EmployeeWage{
 		return 0;
    	}
 
-  	 public int getTotalEmplyeeWage(){
+  	 public int getTotalEmployeeWage(){
 		int totalWage = 0;
 		int workingDays = 0;
 		int workingHrs = 0;
@@ -48,7 +50,11 @@ public class EmployeeWage{
 
    	public static void main(String[] args){
    		System.out.println("Welcome to Employee Wage..");
-    		EmployeeWage empWage = new EmployeeWage(20, 8, 4, 20, 100);
-      		System.out.println("Employee Total Employee wage for month is: "+empWage.getTotalEmplyeeWage());
+    		EmployeeWage empDMart = new EmployeeWage("DMart", 20, 8, 4, 20, 100);
+		EmployeeWage empReliance = new EmployeeWage("Reliance", 24, 9, 5, 25, 120);
+		EmployeeWage empBigBasket = new EmployeeWage("BigBasket", 20, 8, 5, 24, 120);
+      		System.out.println("Employee Total wage of Company: "+ empDMart.company +" and month wage is: "+empDMart.getTotalEmployeeWage());
+		System.out.println("Employee Tatal wage of Company: "+ empReliance.company +" and month wage is: "+ empReliance.getTotalEmployeeWage());
+		System.out.println("Employee Tatal wage of Company: "+ empBigBasket.company +" and month wage is: "+ empBigBasket.getTotalEmployeeWage());
    	}
 }
