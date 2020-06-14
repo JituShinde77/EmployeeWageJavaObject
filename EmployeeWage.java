@@ -1,60 +1,62 @@
 public class EmployeeWage{
 
 	private static final int PRESENT = 1;
-	private static final int ABSENT = 0;
 	private static final int PARTTIME = 2;
+	private Company[] companyArray;
+	private int numberOfEmployee = 0;
 
-	private final int wagePerHour;
-	private final int dayHrs;
-	private final int partTimeHrs;
-	private final int maxWorkingDays;
-	private final int maxWorkingHrs;
-	private final String company;
+	public EmployeeWage(){
+		companyArray = new Company[5];
+	}
 
-	public EmployeeWage(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
-      		this.company = company;
-		this.wagePerHour = wagePerHour;
-     		this.dayHrs = dayHrs;
-		this.partTimeHrs = partTimeHrs;
-		this.maxWorkingDays = maxWorkingDays;
-		this.maxWorkingHrs = maxWorkingHrs;
-   	}
+	public void addCompanyEmployee(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs)
+	{
+		companyArray[numberOfEmployee] = new Company(company, wagePerHour, dayHrs, partTimeHrs, maxWorkingDays, maxWorkingHrs);
+		numberOfEmployee++;
+	}
 
-   	public int getEmpHrs(){
+   	public int getEmpHrs(Company comp){
       		int empCheck = (int)Math.floor(Math.random() * 10 ) %3;
       		switch(empCheck){
         		case PRESENT:
-            			return dayHrs;
+            			return comp.dayHrs;
          		case PARTTIME:
-            			return partTimeHrs;
+            			return comp.partTimeHrs;
 		}
 		return 0;
    	}
 
-  	 public int getTotalEmployeeWage(){
+	public void computeEmployeeWage(){
+		for (int i=0; i< numberOfEmployee; i++)
+			System.out.println("Employee "+getTotalEmployeeWage(companyArray[i]));
+	}
+
+  	 public int getTotalEmployeeWage(Company company){
 		int totalWage = 0;
 		int workingDays = 0;
 		int workingHrs = 0;
-		while (workingDays < maxWorkingDays && workingHrs < maxWorkingHrs){
-   			int empHrs = getEmpHrs();
+		while (workingDays < company.maxWorkingDays && workingHrs < company.maxWorkingHrs){
+   			int empHrs = getEmpHrs(company);
      			int dailyWage = 0;
-      			dailyWage = wagePerHour * empHrs;
+      			dailyWage = company.wagePerHour * empHrs;
 			totalWage = totalWage + dailyWage;
 			++workingDays;
 			workingHrs = workingHrs + empHrs;
 		}
-		if (workingHrs > maxWorkingHrs)
-			return wagePerHour * maxWorkingHrs;
+		if (workingHrs > company.maxWorkingHrs)
+			return company.wagePerHour * company.maxWorkingHrs;
       		return totalWage;
    	}
 
    	public static void main(String[] args){
    		System.out.println("Welcome to Employee Wage..");
-    		EmployeeWage empDMart = new EmployeeWage("DMart", 20, 8, 4, 20, 100);
-		EmployeeWage empReliance = new EmployeeWage("Reliance", 24, 9, 5, 25, 120);
-		EmployeeWage empBigBasket = new EmployeeWage("BigBasket", 20, 8, 5, 24, 120);
-      		System.out.println("Employee Total wage of Company: "+ empDMart.company +" and month wage is: "+empDMart.getTotalEmployeeWage());
-		System.out.println("Employee Tatal wage of Company: "+ empReliance.company +" and month wage is: "+ empReliance.getTotalEmployeeWage());
-		System.out.println("Employee Tatal wage of Company: "+ empBigBasket.company +" and month wage is: "+ empBigBasket.getTotalEmployeeWage());
+		EmployeeWage employeeWage = new EmployeeWage();
+    		employeeWage.addCompanyEmployee("DMart", 20, 8, 4, 20, 100);
+		employeeWage.addCompanyEmployee("Reliance", 24, 9, 5, 25, 120);
+		employeeWage.addCompanyEmployee("BigBasket", 20, 8, 5, 24, 120);
+		employeeWage.computeEmployeeWage();
+      		//System.out.println("Employee Total wage of Company: "+ empDMart.company +" and month wage is: "+empDMart.getTotalEmployeeWage());
+		//System.out.println("Employee Tatal wage of Company: "+ empReliance.company +" and month wage is: "+ empReliance.getTotalEmployeeWage());
+		//System.out.println("Employee Tatal wage of Company: "+ empBigBasket.company +" and month wage is: "+ empBigBasket.getTotalEmployeeWage());
    	}
 }
