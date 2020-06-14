@@ -1,11 +1,17 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.*;
+
 public class EmployeeWage implements IEmployeeWage{
 
 	private ArrayList<Company> companyArray;
+	private Map<String, Integer> companyWageMap;
 	private int numberOfEmployee = 0;
 
 	public EmployeeWage(){
 		companyArray = new ArrayList<Company>();
+		companyWageMap = new HashMap<>();
 	}
 
 	public void addCompanyEmployee(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
@@ -40,6 +46,16 @@ public class EmployeeWage implements IEmployeeWage{
 		}
 	}
 
+	public void wagePerCompany()
+	{
+		Set set= companyWageMap.entrySet();
+		Iterator itr=set.iterator();
+		while(itr.hasNext()){
+        		Map.Entry entry=(Map.Entry)itr.next();
+        		System.out.println(entry.getKey()+":"+entry.getValue());
+    		}
+	}
+
   	public void getTotalEmployeeWage(Company company){
 		int totalWage = 0, workingDays = 0, workingHrs = 0;
 		ArrayList<Integer> dailyWageArray = new ArrayList<Integer>();
@@ -56,6 +72,7 @@ public class EmployeeWage implements IEmployeeWage{
 			company.getTotalWage(totalWage);
 		company.storeDailyWage(dailyWageArray);
 		company.getTotalWage(totalWage);
+		companyWageMap.put(company.company, totalWage);
    	}
 
    	public static void main(String[] args){
@@ -65,5 +82,6 @@ public class EmployeeWage implements IEmployeeWage{
 		employeeWage.addCompanyEmployee("Reliance", 24, 9, 5, 25, 120);
 		employeeWage.addCompanyEmployee("BigBasket", 20, 8, 5, 24, 120);
 		employeeWage.computeEmployeeWage();
+		employeeWage.wagePerCompany();
    	}
 }
