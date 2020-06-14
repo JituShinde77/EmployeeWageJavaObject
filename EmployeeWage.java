@@ -1,17 +1,19 @@
+import java.util.ArrayList;
 public class EmployeeWage{
 
 	private static final int PRESENT = 1;
 	private static final int PARTTIME = 2;
-	private Company[] companyArray;
+	private ArrayList<Company> companyArray;
 	private int numberOfEmployee = 0;
 
 	public EmployeeWage(){
-		companyArray = new Company[5];
+		companyArray = new ArrayList<Company>();
 	}
 
 	public void addCompanyEmployee(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs)
 	{
-		companyArray[numberOfEmployee] = new Company(company, wagePerHour, dayHrs, partTimeHrs, maxWorkingDays, maxWorkingHrs);
+		Company comp = new Company(company, wagePerHour, dayHrs, partTimeHrs, maxWorkingDays, maxWorkingHrs);
+		companyArray.add(comp);
 		numberOfEmployee++;
 	}
 
@@ -28,10 +30,10 @@ public class EmployeeWage{
 
 	public void computeEmployeeWage(){
 		for (int i=0; i< numberOfEmployee; i++)
-			System.out.println("Employee "+getTotalEmployeeWage(companyArray[i]));
+			System.out.println("Employee "+getTotalEmployeeWage(companyArray.get(i)));
 	}
 
-  	 public int getTotalEmployeeWage(Company company){
+  	public int getTotalEmployeeWage(Company company){
 		int totalWage = 0;
 		int workingDays = 0;
 		int workingHrs = 0;
