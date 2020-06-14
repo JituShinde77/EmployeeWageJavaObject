@@ -5,6 +5,7 @@ public class Company{
         public final int partTimeHrs;
         public final int maxWorkingDays;
         public final int maxWorkingHrs;
+	public int totalWage;
 
         public Company(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
                 this.company = company;
@@ -14,5 +15,8 @@ public class Company{
                 this.maxWorkingDays = maxWorkingDays;
                 this.maxWorkingHrs = maxWorkingHrs;
         }
+	public void getTotalWage(int totalWage){
+		this.totalWage = totalWage;
+	}
 }
 

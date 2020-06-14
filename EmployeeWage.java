@@ -27,11 +27,12 @@ public class EmployeeWage implements IEmployeeWage{
 
 	public void computeEmployeeWage(){
 		for (int i=0; i< numberOfEmployee; i++){
-			System.out.println("Company: "+companyArray.get(i).company+ " Employee Wage :"+getTotalEmployeeWage(companyArray.get(i)));
+			getTotalEmployeeWage(companyArray.get(i));
+			System.out.println("Company: "+companyArray.get(i).company+ " Employee Wage :"+companyArray.get(i).totalWage);
 		}
 	}
 
-  	public int getTotalEmployeeWage(Company company){
+  	public void getTotalEmployeeWage(Company company){
 		int totalWage = 0;
 		int workingDays = 0;
 		int workingHrs = 0;
@@ -44,8 +45,10 @@ public class EmployeeWage implements IEmployeeWage{
 			workingHrs = workingHrs + empHrs;
 		}
 		if (workingHrs > company.maxWorkingHrs)
-			return company.wagePerHour * company.maxWorkingHrs;
-      		return totalWage;
+			company.getTotalWage(totalWage);
+		//return company.wagePerHour * company.maxWorkingHrs;
+      		//return totalWage;
+		company.getTotalWage(totalWage);
    	}
 
    	public static void main(String[] args){
