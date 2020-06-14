@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Company{
 	public final String company;
 	public final int wagePerHour;
@@ -6,6 +7,7 @@ public class Company{
         public final int maxWorkingDays;
         public final int maxWorkingHrs;
 	public int totalWage;
+	public ArrayList<Integer> dailyWage = new ArrayList<Integer>();
 
         public Company(String company, int wagePerHour, int dayHrs, int partTimeHrs, int maxWorkingDays, int maxWorkingHrs){
                 this.company = company;
@@ -17,6 +19,10 @@ public class Company{
         }
 	public void getTotalWage(int totalWage){
 		this.totalWage = totalWage;
+	}
+	public void storeDailyWage(ArrayList<Integer> dailyWage )
+	{
+		this.dailyWage = dailyWage;
 	}
 }
 

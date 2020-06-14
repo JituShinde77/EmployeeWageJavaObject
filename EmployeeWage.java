@@ -29,25 +29,32 @@ public class EmployeeWage implements IEmployeeWage{
 		for (int i=0; i< numberOfEmployee; i++){
 			getTotalEmployeeWage(companyArray.get(i));
 			System.out.println("Company: "+companyArray.get(i).company+ " Employee Wage :"+companyArray.get(i).totalWage);
+			int pastWage = 0;
+			System.out.println("Day         TodayWage         Total Wage");
+			for (int j=0; j<companyArray.get(i).dailyWage.size(); j++){
+
+				System.out.println("Day: "+ j +"\t\t"+(companyArray.get(i).dailyWage.get(j)-pastWage)+"\t\t"+companyArray.get(i).dailyWage.get(j));
+				pastWage = companyArray.get(i).dailyWage.get(j);
+			}
+		        System.out.println("------------------------------------------------------------");
 		}
 	}
 
   	public void getTotalEmployeeWage(Company company){
-		int totalWage = 0;
-		int workingDays = 0;
-		int workingHrs = 0;
+		int totalWage = 0, workingDays = 0, workingHrs = 0;
+		ArrayList<Integer> dailyWageArray = new ArrayList<Integer>();
 		while (workingDays < company.maxWorkingDays && workingHrs < company.maxWorkingHrs){
    			int empHrs = getEmpHrs(company);
      			int dailyWage = 0;
       			dailyWage = company.wagePerHour * empHrs;
 			totalWage = totalWage + dailyWage;
+			dailyWageArray.add(totalWage);
 			++workingDays;
 			workingHrs = workingHrs + empHrs;
 		}
 		if (workingHrs > company.maxWorkingHrs)
 			company.getTotalWage(totalWage);
-		//return company.wagePerHour * company.maxWorkingHrs;
-      		//return totalWage;
+		company.storeDailyWage(dailyWageArray);
 		company.getTotalWage(totalWage);
    	}
 
